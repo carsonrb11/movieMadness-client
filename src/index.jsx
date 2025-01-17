@@ -1,7 +1,7 @@
-import { createRoot } from 'react-dom/clinet';
+import { createRoot } from 'react-dom/client';
 
 //import statement to indicate that you need to bundle `./index.scss`
-import ".index.scss";
+import "./index.scss";
 
 //Main Compnent (will eventually use all others)
 const MovieMadnessApplication = () => {
