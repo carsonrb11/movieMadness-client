@@ -27,7 +27,9 @@ export const MainView = () => {
     }, []);
 
     if (selectedMovie) {
-        let similarMovies = movies.filter(function () { });
+        let similarMovies = movies.filter((movie, index) => {
+            return movie === movie.Genre.Name//logic
+        });
         return (
             <>
                 <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
