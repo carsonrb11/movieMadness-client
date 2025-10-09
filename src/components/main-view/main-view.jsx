@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 export const MainView = () => {
@@ -6,24 +7,42 @@ export const MainView = () => {
 
     const [selectedMovie, setSelectedMovie] = useState(null);
     useEffect(() => {
-        fetch("")
-        .then((response) => response.json())
-        .then((data) => {
-            const moviesFromApi = data.docs.map((doc) => {
-                return {
-                    id: doc.key,
-                    title: doc.title,
-                    image: "",
-                    author: doc.author_name?.[0],
-                };
+        fetch("https://movie-madness-6651c785b11e.herokuapp.com/movies")
+            .then((response) => response.json())
+            .then((data) => {
+                const moviesFromApi = data.map((movie) => ({
+                    id: movie._id,
+                    title: movie.Title,
+                    description: movie.Description,
+                    image: movie.ImagePath,
+                    director: movie.Director.Name,
+                    bio: movie.Director.Bio,
+                    birth: movie.Director.Birth,
+                    death: movie.Director.Death,
+                    genre: movie.Genre.Name,
+                    featured: movie.Featured
+                }));
+                setMovies(moviesFromApi);
             });
-            setMovies(moviesFromApi);
-        });
     }, []);
 
     if (selectedMovie) {
+        let similarMovies = movies.filter(function () { });
         return (
-            <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+            <>
+                <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+                <hr />
+                <h2>Similar Movies</h2>
+                {similarMovies.map((movie) => (
+                    <MovieCard
+                        key={movie.id}
+                        movie={movie}
+                        onMovieClick={(newSelectedMovie) => {
+                            setSelectedMovie(newSelectedMovie)
+                        }}
+                    />
+                ))}
+            </>
         );
     }
 
