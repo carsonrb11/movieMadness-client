@@ -29,5 +29,6 @@ MovieCard.propTypes = {
             Description: PropTypes.string.isRequired
         }),
         Featured: PropTypes.boolean.isRequired
-    })
-}
+    }).isRequired,
+    onMovieClick: PropTypes.func.isRequired
+};
