@@ -24,12 +24,12 @@ MovieCard.propTypes = {
             bio: PropTypes.string.isRequired,
             birth: PropTypes.string.isRequired,
             death: PropTypes.string
-        }),
+        }).isRequired,
         genre: PropTypes.shape({
             name: PropTypes.string.isRequired,
             description: PropTypes.string.isRequired
-        }),
-        featured: PropTypes.boolean.isRequired
+        }).isRequired,
+        featured: PropTypes.bool.isRequired
     }).isRequired,
     onMovieClick: PropTypes.func.isRequired
 };

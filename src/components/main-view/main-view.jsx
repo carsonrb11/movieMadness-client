@@ -67,3 +67,6 @@ export const MainView = () => {
         );
     }
 };
+
+//MainView does not currently receive any props:
+MainView.propTypes = {};
