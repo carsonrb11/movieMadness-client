@@ -12,15 +12,15 @@ export const MainView = () => {
             .then((data) => {
                 const moviesFromApi = data.map((movie) => ({
                     id: movie._id,
-                    title: movie.title,
-                    description: movie.description,
-                    image: movie.image,
-                    director: movie.director.name,
-                    bio: movie.director.bio,
-                    birth: movie.director.birth,
-                    death: movie.director.death,
-                    genre: movie.genre.name,
-                    featured: movie.featured
+                    title: movie.Title || movie.title,
+                    description: movie.Description || movie.description,
+                    image: movie.ImagePath || movie.image,
+                    director: movie.Director?.Name || movie.director?.name || movie.director || "Unknown Director",
+                    bio: movie.Director?.Bio || movie.director?.bio || "No bio available",
+                    birth: movie.Director?.Birth || movie.director?.birth || "",
+                    death: movie.Director?.Death || movie.director?.death || "",
+                    genre: movie.Genre?.Name || movie.genre?.name || movie.genre || "Unknown Genre",
+                    featured: movie.Featured || movie.featured || false
                 }));
                 setMovies(moviesFromApi);
             });
@@ -29,7 +29,7 @@ export const MainView = () => {
     if (selectedMovie) {
         let similarMovies = movies.filter((movie) => {
             //logic
-            return movie.genre.name === selectedMovie.genre.name && movie.id !== selectedMovie.id;
+            return movie.genre === selectedMovie.genre && movie.id !== selectedMovie.id;
         });
         return (
             <>
