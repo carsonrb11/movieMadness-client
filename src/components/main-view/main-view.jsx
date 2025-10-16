@@ -4,8 +4,9 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
-
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const [user, setUser] = useState(null);
+
     useEffect(() => {
         fetch("https://movie-madness-6651c785b11e.herokuapp.com/movies")
             .then((response) => response.json())
@@ -25,6 +26,10 @@ export const MainView = () => {
                 setMovies(moviesFromApi);
             });
     }, []);
+
+    if (!user) {
+        return <LoginView onLoggedIn={(user) => setUser(user)} />;
+    }
 
     if (selectedMovie) {
         let similarMovies = movies.filter((movie) => {
