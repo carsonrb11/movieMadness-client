@@ -16,11 +16,16 @@ export const MainView = () => {
                     title: movie.Title || movie.title,
                     description: movie.Description || movie.description,
                     image: movie.ImagePath || movie.image,
-                    director: movie.Director?.Name || movie.director?.name || movie.director || "Unknown Director",
-                    bio: movie.Director?.Bio || movie.director?.bio || "No bio available",
-                    birth: movie.Director?.Birth || movie.director?.birth || "",
-                    death: movie.Director?.Death || movie.director?.death || "",
-                    genre: movie.Genre?.Name || movie.genre?.name || movie.genre || "Unknown Genre",
+                    director: {
+                        name: movie.Director?.Name || movie.director?.name || movie.director || "Unknown Director",
+                        bio: movie.Director?.Bio || movie.director?.bio || "No bio available",
+                        birth: movie.Director?.Birth || movie.director?.birth || "",
+                        death: movie.Director?.Death || movie.director?.death || "",
+                    },
+                    genre: {
+                        name: movie.Genre?.Name || movie.genre?.name || movie.genre || "Unknown Genre",
+                        description: movie.Genre?.Description || movie.genre?.description || "No description available"
+                    },
                     featured: movie.Featured || movie.featured || false
                 }));
                 setMovies(moviesFromApi);
