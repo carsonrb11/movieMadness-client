@@ -41,8 +41,8 @@ export const SignupView = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
-                    minlength="8"
-                    maxlength="20"
+                    minLength="8"
+                    maxLength="20"
                 />
             </label>
             <label>
@@ -52,7 +52,7 @@ export const SignupView = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    minlength="8"
+                    minLength="8"
                 />
             </label>
             <label>
