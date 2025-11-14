@@ -19,12 +19,17 @@ MovieCard.propTypes = {
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         image: PropTypes.string,
-        director: PropTypes.string.isRequired,
-        bio: PropTypes.string.isRequired,
-        birth: PropTypes.string.isRequired,
-        death: PropTypes.string,
-        genre: PropTypes.string.isRequired,
-        featured: PropTypes.bool.isRequired
+        director: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            bio: PropTypes.string.isRequired,
+            birth: PropTypes.string.isRequired,
+            death: PropTypes.string.isRequired
+        }).isRequired,
+        genre: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired
+        }).isRequired,
+        featured: PropTypes.bool
     }).isRequired,
     onMovieClick: PropTypes.func.isRequired
 };
