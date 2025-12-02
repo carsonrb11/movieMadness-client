@@ -33,10 +33,10 @@ export const SignupView = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formUsername">
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -44,36 +44,42 @@ export const SignupView = () => {
                     minLength="8"
                     maxLength="20"
                 />
-            </label>
-            <label>
-                Password:
-                <input
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     minLength="8"
                 />
-            </label>
-            <label>
-                Email:
-                <input
+            </Form.Group>
+
+            <Form.Group controlId="formEmail">
+                <Form.Label>Email:</Form.Label>
+                <Form.Control
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-            </label>
-            <label>
-                Birthdate:
-                <input
+            </Form.Group>
+
+            <Form.Group controlId="formBirthdate">
+                <Form.Label>Birthdate:</Form.Label>
+                <Form.Control
                     type="date"
                     value={birthdate}
                     onChange={(e) => setBirthdate(e.target.value)}
                     required
                 />
-            </label>
-            <button type="submit">Sign Up</button>
-        </form>
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+                Sign Up
+            </Button>
+        </Form>
     );
 };
