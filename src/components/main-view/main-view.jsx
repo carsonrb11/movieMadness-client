@@ -4,6 +4,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { SignupView } from "../signup-view/signup-view";
 import { LoginView } from "../login-view/login-view";
+import { Row, Col } from "react-bootstrap";
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
@@ -44,7 +45,7 @@ export const MainView = () => {
     }, [token]);
 
     return (
-        <row className="justify-content-md-center">
+        <Row className="justify-content-md-center">
             {!user ? (
                 <Col md={5}>
                     <LoginView onLoggedIn={(user, token) => {
@@ -57,9 +58,9 @@ export const MainView = () => {
             ) : selectedMovie ? (
                 <>
                     <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-                    <col md={8}>
+                    <Col md={8}>
                         <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-                    </col>
+                    </Col>
                     <hr />
                     <h2>Similar Movies</h2>
                     {movies
@@ -98,7 +99,7 @@ export const MainView = () => {
                     ))}
                 </>
             )}
-        </row>
+        </Row>
     );
 };
 
