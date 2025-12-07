@@ -57,7 +57,9 @@ export const MainView = () => {
                 </Col>
             ) : selectedMovie ? (
                 <>
-                    <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
+                    <Col>
+                        <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</Button>
+                    </Col>
                     <Col md={8}>
                         <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
                     </Col>
@@ -81,12 +83,16 @@ export const MainView = () => {
                 </>
             ) : movies.length === 0 ? (
                 <>
-                    <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
+                    <Col>
+                        <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</Button>
+                    </Col>
                     <div>The list is empty! Sorry!</div>
                 </>
             ) : (
                 <>
-                    <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
+                    <Col>
+                        <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</Button>
+                    </Col>
                     {movies.map((movie) => (
                         <Col className="mb-5" md={3} key={movie.id}>
                             <MovieCard
