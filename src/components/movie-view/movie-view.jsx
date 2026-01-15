@@ -1,12 +1,24 @@
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useParams, Link, Navigate } from "react-router-dom";
 import "./movie-view.scss";
 
 export const MovieView = ({ movies, user, token, onUserUpdate }) => {
     const { movieId } = useParams();
-    const movie = movies.find((m) => m.id === movieId);
+    const decodedId = decodeURIComponent(movieId);
+    const movie = movies.find((m) => String(m.id) === String(decodedId));
+
+    //For if movie has not loaded yet
+    if (!movies || movies.length === 0) return <div>Loading movie...</div>;
+
+    //If route is invalid, redirect to home
+    if (!movie) return <Navigate to="/" replace />;
+
     const isFavorite = user?.FavoriteMovies?.includes(movie.id);
+
+    const similarMovies = movies.filter(
+        (m) => m.genre?.name === movie.genre?.name && m.id !== movie.id
+    );
 
     const addToFavorites = () => {
         fetch(
@@ -62,30 +74,34 @@ export const MovieView = ({ movies, user, token, onUserUpdate }) => {
                 </Button>
             )}
 
-            <Link to={`/`}>
-                <Button className="back-button mt-3">Back</Button>
-            </Link>
+            <div className="mt-3">
+                <Link to={`/`}>
+                    <Button className="back-button mt-3">Back</Button>
+                </Link>
+            </div>
+
+            <hr className="my-4" />
+
+            <h2>Similar Movies</h2>
+
+            {similarMovies.length === 0 ? (
+                <div>No similar movies found.</div>
+            ) : (
+                <Row>
+                    {similarMovies.map((m) => (
+                        <Col className="mb-4" md={3} key={m.id}>
+                            <MovieCard movie={m} onMovieClick={() => { }} />
+                        </Col>
+                    ))}
+                </Row>
+            )}
         </div>
     );
 };
 
 MovieView.propTypes = {
-    movie: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        image: PropTypes.string,
-        director: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            bio: PropTypes.string.isRequired,
-            birth: PropTypes.string.isRequired,
-            death: PropTypes.string.isRequired
-        }).isRequired,
-        genre: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            description: PropTypes.string.isRequired
-        }).isRequired,
-        featured: PropTypes.bool
-    }).isRequired,
-    onBackClick: PropTypes.func.isRequired
-};
+    movie: PropTypes.array.isRequired,
+    user: PropTypes.object,
+    token: PropTypes.string,
+    onUserUpdate: PropTypes.func.isRequired
+}.isRequired
