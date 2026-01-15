@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 // If you want a default, you can import MovieCard here and use it as fallback.
 // import { MovieCard } from "../movie-card/movie-card";
@@ -186,4 +187,3 @@ export const ProfileView = ({
         </div>
     );
 };
-import PropTypes from "prop-types";
