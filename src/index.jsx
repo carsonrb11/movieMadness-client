@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 
-import { MainView } from "./components/main-view/main-view"
+import { MainView } from "./components/main-view/main-view";
+import { BrowserRouter } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
 //import statement to indicate that you need to bundle `./index.scss`
@@ -9,9 +10,11 @@ import "./index.scss";
 //Main Compnent (will eventually use all others)
 const MovieMadnessApplication = () => {
     return (
-        <Container>
-            <MainView />
-        </Container>
+        <BrowserRouter>
+            <Container>
+                <MainView />
+            </Container>
+        </BrowserRouter>
     )
 };
 
