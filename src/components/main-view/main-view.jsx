@@ -47,6 +47,12 @@ export const MainView = () => {
             });
     }, [token]);
 
+    const handleLoggedOut = () => {
+        setUser(null);
+        setToken(null);
+        localStorage.clear();
+    };
+
     return (
         <>
             <NavigationBar user={user} onLoggedOut={handleLoggedOut} />
