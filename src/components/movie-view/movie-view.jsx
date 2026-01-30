@@ -108,4 +108,4 @@ MovieView.propTypes = {
     user: PropTypes.object,
     token: PropTypes.string,
     onUserUpdate: PropTypes.func.isRequired
-}.isRequired
+};
