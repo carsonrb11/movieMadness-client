@@ -12,12 +12,12 @@ import "./index.scss";
 //Main Compnent (will eventually use all others)
 const MovieMadnessApplication = () => {
     return (
-        <BrowserRouter>
+        <Provider store={store}>
             <Container>
                 <MainView />
             </Container>
-        </BrowserRouter>
-    )
+        </Provider>
+    );
 };
 
 //Finds the root of your app
